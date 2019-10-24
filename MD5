@@ -1,4 +1,4 @@
-979a20b15d29f08c12dd830f628f51dc *DESCRIPTION
+be8214372c16d33e97de625aa3ce1e76 *DESCRIPTION
 c1ff976f211826e9df9d9b6c1fb1a8c6 *NAMESPACE
 0dd463e5a9a668ed08887be9256bd52d *R/RcppExports.R
 9e72ae72a7dcdfefbbfb5a9efcd20936 *R/attributes.r
@@ -11,9 +11,8 @@ f723a490dd4ccdc84f8af6954eec426a *R/header.r
 e4b4afb9d1072047e34270340f9cef1a *R/quick_view.r
 680eff03020eb372b0cc4ed40ac3c51a *R/save.r
 40e426b6a2f8430f649e9b7a3647cdbb *R/tag_tokens.r
-2c1a86dccaeb2b0cb66c82009d539556 *R/token_nav.r
-a451ee7b6ea648b87bcfbc5adeb1e3ef *R/tokenbrowser.r
-c262e5c2e57ffe5f45a0c1c1875ff9c3 *R/tokenvis.r
+60f1ad437e0eac2d161769ac423f9cba *R/token_nav.r
+68b25665640c93d069afa4625ea94d99 *R/tokenvis.r
 331b7deede689c7b51af8b958da22fa2 *R/util.r
 31eeb5387c80f45d3ad30abd77405ada *R/wrap_documents.r
 952f861cb6375230ae63126f4119c89c *README.md
@@ -47,4 +46,4 @@ a29fa23021c4bd16380edd6a18a4d583 *man/view_browser.Rd
 820964132feedbfa9e77bddd818ca2e4 *src/ngrams.cpp
 a38c3477edc6e8df965f81f23081a5b8 *src/util.cpp
 ce4fe7ff259d88c3bc0ad149f3b04d31 *tests/testthat.r
-7c8be11f45c0e2418ebc06c7318cd0a6 *tests/testthat/test_tokenvis.r
+f754d211490338f99008b3adb4b6e31f *tests/testthat/test_tokenvis.r

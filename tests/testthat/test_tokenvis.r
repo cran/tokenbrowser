@@ -2,6 +2,7 @@ test_that("tokenbrowser", {
   d = sotu_data
 
   ## simple
+  d$tokens
   url = create_browser(d$tokens, d$meta, token_col = 'token', header = 'Speeches')
   #view_browser(url)
 
@@ -38,6 +39,7 @@ test_that("tokenbrowser", {
   category[sotu_data$tokens$doc_id == unique(sotu_data$tokens$doc_id)[2]] = NA ## add empty document for test
   url = categorical_browser(sotu_data$tokens, category=category, labels=c('N','M','V'), meta=sotu_data$meta, top_nav=2)
   #view_browser(url)
+
 
 })
 

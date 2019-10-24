@@ -1,7 +1,7 @@
 Package: tokenbrowser
 Type: Package
 Title: Create Full Text Browsers from Annotated Token Lists
-Version: 0.1.0
+Version: 0.1.1
 Author: Kasper Welbers and Wouter van Atteveldt
 Maintainer: Kasper Welbers <kasperwelbers@gmail.com>
 License: GPL-3
@@ -17,6 +17,6 @@ SystemRequirements: C++11
 Encoding: UTF-8
 RoxygenNote: 6.1.1
 NeedsCompilation: yes
-Packaged: 2019-05-17 14:35:54 UTC; kasper
+Packaged: 2019-10-24 15:41:28 UTC; kasper
 Repository: CRAN
-Date/Publication: 2019-05-17 16:20:04 UTC
+Date/Publication: 2019-10-24 16:10:02 UTC

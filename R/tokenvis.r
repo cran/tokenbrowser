@@ -33,6 +33,8 @@
 #' browseURL(url)     ## view browser in default webbrowser
 #' }
 create_browser <- function(tokens, meta=NULL, doc_col='doc_id', token_col='token', doc_nav=NULL, token_nav=NULL, filename=NULL, css_str=NULL, header='', subheader='', n=TRUE, navfilter=TRUE, top_nav=NULL, thres_nav=1, colors=NULL, style_col1="#7D1935", style_col2="#F5F3EE"){
+  tokens[[doc_col]] = factor(as.character(tokens[[doc_col]]), levels=unique(tokens[[doc_col]]))
+
   docs = wrap_documents(tokens, meta, doc_col, token_col, nav=doc_nav, token_nav = token_nav, top_nav=top_nav, thres_nav=thres_nav)
   docstring = stringi::stri_paste(docs, collapse='\n\n')
 

@@ -3,8 +3,9 @@ test_that("tokenbrowser", {
 
   ## simple
   d$tokens
+  d$meta$test = NA
   url = create_browser(d$tokens, d$meta, token_col = 'token', header = 'Speeches')
-  #view_browser(url)
+  view_browser(url)
 
   ## simple with navigation
   url = create_browser(d$tokens, d$meta, token_col = 'token', header = 'Speeches', doc_nav = 'headline')

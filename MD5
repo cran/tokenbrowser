@@ -1,11 +1,11 @@
-be8214372c16d33e97de625aa3ce1e76 *DESCRIPTION
+542928e8d6092c0d4c2e3a67d88aa8f0 *DESCRIPTION
 c1ff976f211826e9df9d9b6c1fb1a8c6 *NAMESPACE
 0dd463e5a9a668ed08887be9256bd52d *R/RcppExports.R
 9e72ae72a7dcdfefbbfb5a9efcd20936 *R/attributes.r
 6e2b49118f555ac37bf252c9b0087c0c *R/colorize.r
 687a011777412d8452441410734ce4a6 *R/data.r
 f723a490dd4ccdc84f8af6954eec426a *R/header.r
-7a6965d7a34733dcf04479b98159604f *R/html_misc.r
+8bdc98e0cafcb0dc6cc1ce0cdd4fab4a *R/html_misc.r
 34a095567b7bb1745de2bd0d1c33a48e *R/imports.r
 9e802eb1831a0051a8e35195fdb460b3 *R/navigation.r
 e4b4afb9d1072047e34270340f9cef1a *R/quick_view.r
@@ -14,7 +14,7 @@ e4b4afb9d1072047e34270340f9cef1a *R/quick_view.r
 60f1ad437e0eac2d161769ac423f9cba *R/token_nav.r
 68b25665640c93d069afa4625ea94d99 *R/tokenvis.r
 331b7deede689c7b51af8b958da22fa2 *R/util.r
-31eeb5387c80f45d3ad30abd77405ada *R/wrap_documents.r
+5a62bd63401801fea981ce9f9d002dea *R/wrap_documents.r
 952f861cb6375230ae63126f4119c89c *README.md
 4ae12aabb7547484be8ae79f4b2edc8a *data/sotu_data.rda
 bfa3b28e1d95e291bf95dd09220fb560 *data/sotu_lda.rda
@@ -46,4 +46,4 @@ a29fa23021c4bd16380edd6a18a4d583 *man/view_browser.Rd
 820964132feedbfa9e77bddd818ca2e4 *src/ngrams.cpp
 a38c3477edc6e8df965f81f23081a5b8 *src/util.cpp
 ce4fe7ff259d88c3bc0ad149f3b04d31 *tests/testthat.r
-f754d211490338f99008b3adb4b6e31f *tests/testthat/test_tokenvis.r
+4b44bbd648571e235eca8b10ef88e0c0 *tests/testthat/test_tokenvis.r

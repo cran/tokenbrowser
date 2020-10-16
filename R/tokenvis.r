@@ -6,6 +6,7 @@
 #'                  to the browser as document meta
 #' @param doc_col   The name of the document id column
 #' @param token_col The name of the token column
+#' @param space_col  Optionally, a column with space indications (" ", "\\n", etc.) per token (which is how some NLP parsers indicate spaces)
 #' @param doc_nav   The name of a column (factor or character) in meta, used to create a navigation bar for selecting document groups.
 #' @param token_nav Alternative to doc_nav, a column in the tokens. Navigation filters will then be used to select documents in which
 #'                  the value occurs at least once.
@@ -30,12 +31,14 @@
 #'
 #' \donttest{
 #' view_browser(url)   ## view browser in the Viewer
-#' browseURL(url)     ## view browser in default webbrowser
 #' }
-create_browser <- function(tokens, meta=NULL, doc_col='doc_id', token_col='token', doc_nav=NULL, token_nav=NULL, filename=NULL, css_str=NULL, header='', subheader='', n=TRUE, navfilter=TRUE, top_nav=NULL, thres_nav=1, colors=NULL, style_col1="#7D1935", style_col2="#F5F3EE"){
+#' if (interactive()) {
+#' browseURL(url)     ## view in default webbrowser
+#' }
+create_browser <- function(tokens, meta=NULL, doc_col='doc_id', token_col='token', space_col=NULL, doc_nav=NULL, token_nav=NULL, filename=NULL, css_str=NULL, header='', subheader='', n=TRUE, navfilter=TRUE, top_nav=NULL, thres_nav=1, colors=NULL, style_col1="#7D1935", style_col2="#F5F3EE"){
   tokens[[doc_col]] = factor(as.character(tokens[[doc_col]]), levels=unique(tokens[[doc_col]]))
 
-  docs = wrap_documents(tokens, meta, doc_col, token_col, nav=doc_nav, token_nav = token_nav, top_nav=top_nav, thres_nav=thres_nav)
+  docs = wrap_documents(tokens, meta, doc_col, token_col, space_col, nav=doc_nav, token_nav = token_nav, top_nav=top_nav, thres_nav=thres_nav)
   docstring = stringi::stri_paste(docs, collapse='\n\n')
 
   doc_ids = unique(tokens[[doc_col]])
@@ -90,6 +93,8 @@ create_browser <- function(tokens, meta=NULL, doc_col='doc_id', token_col='token
 #' @param doc_nav   The name of a column in meta, used to set a navigation tag
 #' @param token_nav Alternative to doc_nav, a column in the tokens, used to set a navigation tag
 #' @param filename  Name of the output file. Default is temp file
+#' @param unfold    Either a character vector or a named list of vectors of the same length as tokens. If given, all tokens with a tag can be clicked on to unfold the given text. If a list of vectors is given,
+#'                  the values of the columns are concatenated with the column name. E.g. list(doc_id = 1, sentence = 1) will be [doc_id = 1, sentence = 2].
 #' @param span_adjacent If TRUE, include adjacent tokens with identical attributes within the same tag
 #' @param ...       Additional formatting arguments passed to create_browser()
 #'
@@ -105,10 +110,12 @@ create_browser <- function(tokens, meta=NULL, doc_col='doc_id', token_col='token
 #'
 #' \donttest{
 #' view_browser(url)   ## view browser in the Viewer
-#' browseURL(url)     ## view browser in default webbrowser
 #' }
-highlighted_browser <- function(tokens, value, meta=NULL, col='yellow', doc_col='doc_id', token_col='token', doc_nav=NULL, token_nav=NULL, filename=NULL, span_adjacent=T, ...){
-  tokens[[token_col]] = highlight_tokens(tokens[[token_col]], value=value, col = col, span_adjacent = span_adjacent)
+#' if (interactive()) {
+#' browseURL(url)     ## view in default webbrowser
+#' }
+highlighted_browser <- function(tokens, value, meta=NULL, col='yellow', doc_col='doc_id', token_col='token', doc_nav=NULL, token_nav=NULL, filename=NULL, unfold=NULL, span_adjacent=T, ...){
+  tokens[[token_col]] = highlight_tokens(tokens[[token_col]], value=value, col = col, unfold=unfold, span_adjacent = span_adjacent, doc_id=tokens[[doc_col]])
   create_browser(tokens, meta, doc_col, token_col, doc_nav=doc_nav, token_nav=token_nav, filename=filename, ...)
 }
 
@@ -129,6 +136,8 @@ highlighted_browser <- function(tokens, value, meta=NULL, col='yellow', doc_col=
 #' @param doc_nav   The name of a column in meta, used to set a navigation tag
 #' @param token_nav Alternative to doc_nav, a column in the tokens, used to set a navigation tag
 #' @param filename  Name of the output file. Default is temp file
+#' @param unfold  Either a character vector or a named list of vectors of the same length as tokens. If given, all tokens with a tag can be clicked on to unfold the given text. If a list of vectors is given,
+#'                the values of the columns are concatenated with the column name. E.g. list(doc_id = 1, sentence = 1) will be [doc_id = 1, sentence = 2].
 #' @param span_adjacent If TRUE, include adjacent tokens with identical attributes within the same tag
 #' @param ...       Additional formatting arguments passed to create_browser()
 #'
@@ -145,10 +154,12 @@ highlighted_browser <- function(tokens, value, meta=NULL, col='yellow', doc_col=
 #'
 #' \donttest{
 #' view_browser(url)   ## view browser in the Viewer
-#' browseURL(url)     ## view browser in default webbrowser
 #' }
-colorscaled_browser <- function(tokens, value, alpha=0.4, meta=NULL, col_range=c('red','blue'), doc_col='doc_id', token_col='token', doc_nav=NULL, token_nav=NULL, filename=NULL, span_adjacent=T, ...){
-  tokens[[token_col]] = colorscale_tokens(tokens=tokens[[token_col]], value=value, col_range = col_range, alpha=alpha, span_adjacent = span_adjacent)
+#' if (interactive()) {
+#' browseURL(url)     ## view in default webbrowser
+#' }
+colorscaled_browser <- function(tokens, value, alpha=0.4, meta=NULL, col_range=c('red','blue'), doc_col='doc_id', token_col='token', doc_nav=NULL, token_nav=NULL, filename=NULL, unfold=NULL, span_adjacent=T, ...){
+  tokens[[token_col]] = colorscale_tokens(tokens=tokens[[token_col]], value=value, col_range = col_range, alpha=alpha, unfold=unfold, span_adjacent = span_adjacent, doc_id=tokens[[doc_col]])
   create_browser(tokens, meta, doc_col, token_col, doc_nav=doc_nav, token_nav=token_nav, filename=filename, ...)
 }
 
@@ -171,6 +182,8 @@ colorscaled_browser <- function(tokens, value, alpha=0.4, meta=NULL, col_range=c
 #' @param token_col The name of the token column
 #' @param filename  Name of the output file. Default is temp file
 #' @param span_adjacent If TRUE, include adjacent tokens with identical attributes within the same tag
+#' @param unfold  Either a character vector or a named list of vectors of the same length as tokens. If given, all tokens with a tag can be clicked on to unfold the given text. If a list of vectors is given,
+#'                the values of the columns are concatenated with the column name. E.g. list(doc_id = 1, sentence = 1) will be [doc_id = 1, sentence = 2].
 #' @param ...       Additional formatting arguments passed to create_browser()
 #'
 #' @return The name of the file where the browser is saved. Can be opened conveniently from within R using browseUrl()
@@ -186,9 +199,11 @@ colorscaled_browser <- function(tokens, value, alpha=0.4, meta=NULL, col_range=c
 #'
 #' \donttest{
 #' view_browser(url)   ## view browser in the Viewer
-#' browseURL(url)     ## view browser in default webbrowser
 #' }
-categorical_browser <- function(tokens, category, alpha=0.3, labels=NULL, meta=NULL, colors=NULL, doc_col='doc_id', token_col='token', filename=NULL, span_adjacent=T, ...){
+#' if (interactive()) {
+#' browseURL(url)     ## view in default webbrowser
+#' }
+categorical_browser <- function(tokens, category, alpha=0.3, labels=NULL, meta=NULL, colors=NULL, doc_col='doc_id', token_col='token', filename=NULL, unfold=NULL, span_adjacent=T, ...){
   if (methods::is(category, 'character')) category = as.factor(category)
   if (methods::is(category, 'numeric') && is.null(labels)) labels = stats::na.omit(unique(category))
   if (methods::is(category, 'factor')) {
@@ -198,12 +213,12 @@ categorical_browser <- function(tokens, category, alpha=0.3, labels=NULL, meta=N
   }
 
   if (is.null(meta)) {
-    meta = data.frame(doc_id = tokens[[doc_col]])
+    meta = data.frame(doc_id = unique(tokens[[doc_col]]))
     colnames(meta) = doc_col
   }
   if (is.null(colors)) colors = grDevices::rainbow(length(unique(stats::na.omit(category))))
 
-  tokens[[token_col]] = category_highlight_tokens(tokens[[token_col]], category=category, labels=labels, alpha=alpha, colors = colors, span_adjacent = span_adjacent)
+  tokens[[token_col]] = category_highlight_tokens(tokens[[token_col]], category=category, labels=labels, alpha=alpha, colors = colors, unfold=unfold, span_adjacent = span_adjacent, doc_id=tokens[[doc_col]])
   tokens[['multi_cat']] = factor(category, labels=labels)
   create_browser(tokens, meta, doc_col, token_col, token_nav='multi_cat', filename= filename, colors=colors, ...)
 }

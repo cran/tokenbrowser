@@ -8,8 +8,11 @@ colorscale_tokens(
   tokens,
   value,
   alpha = 0.4,
+  class = NULL,
   col_range = c("red", "blue"),
-  span_adjacent = F
+  unfold = NULL,
+  span_adjacent = F,
+  doc_id = NULL
 )
 }
 \arguments{
@@ -21,9 +24,17 @@ specified in col_range}
 \item{alpha}{Optionally, the alpha (transparency) can be specified, with 0 being fully transparent and 1 being
 fully colored. This can be a vector to specify a different alpha for each value.}
 
+\item{class}{Optionally, a character vector of the class to add to the span tags. If NA no class is added}
+
 \item{col_range}{The colors used in the scale ramp.}
 
+\item{unfold}{Either a character vector or a named list of vectors of the same length as tokens. If given, all tokens with a tag can be clicked on to unfold the given text. If a list of vectors is given,
+the values of the columns are concatenated with the column name. E.g. list(doc_id = 1, sentence = 1) will be [doc_id = 1, sentence = 2].
+This only works if the tagged tokens are used in the html browser created with the \code{\link{create_browser}} function (as it relies on javascript).}
+
 \item{span_adjacent}{If TRUE, include adjacent tokens with identical attributes within the same tag}
+
+\item{doc_id}{If span_adjacent is TRUE, The document ids are required to ensure that tags do not span from one document to another.}
 }
 \value{
 a character vector of color-tagged tokens

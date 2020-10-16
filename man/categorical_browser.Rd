@@ -14,6 +14,7 @@ categorical_browser(
   doc_col = "doc_id",
   token_col = "token",
   filename = NULL,
+  unfold = NULL,
   span_adjacent = T,
   ...
 )
@@ -44,6 +45,9 @@ as unique(na.omit(category))}
 
 \item{filename}{Name of the output file. Default is temp file}
 
+\item{unfold}{Either a character vector or a named list of vectors of the same length as tokens. If given, all tokens with a tag can be clicked on to unfold the given text. If a list of vectors is given,
+the values of the columns are concatenated with the column name. E.g. list(doc_id = 1, sentence = 1) will be [doc_id = 1, sentence = 2].}
+
 \item{span_adjacent}{If TRUE, include adjacent tokens with identical attributes within the same tag}
 
 \item{...}{Additional formatting arguments passed to create_browser()}
@@ -64,6 +68,8 @@ url = categorical_browser(sotu_data$tokens, category=code, meta=sotu_data$meta)
 
 \donttest{
 view_browser(url)   ## view browser in the Viewer
-browseURL(url)     ## view browser in default webbrowser
+}
+if (interactive()) {
+browseURL(url)     ## view in default webbrowser
 }
 }

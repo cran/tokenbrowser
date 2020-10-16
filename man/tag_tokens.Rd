@@ -4,7 +4,14 @@
 \alias{tag_tokens}
 \title{add span tags to tokens}
 \usage{
-tag_tokens(tokens, tag = "span", span_adjacent = F, ...)
+tag_tokens(
+  tokens,
+  tag = "span",
+  span_adjacent = F,
+  doc_id = NULL,
+  unfold = NULL,
+  ...
+)
 }
 \arguments{
 \item{tokens}{a vector of tokens.}
@@ -12,6 +19,12 @@ tag_tokens(tokens, tag = "span", span_adjacent = F, ...)
 \item{tag}{The name of the tag to be used}
 
 \item{span_adjacent}{If TRUE, include adjacent tokens with identical attributes within the same tag}
+
+\item{doc_id}{If span_adjacent is TRUE, The document ids are required to ensure that tags do not span from one document to another.}
+
+\item{unfold}{Either a character vector or a named list of vectors of the same length as tokens. If given, all tokens with a tag can be clicked on to unfold the given text. If a list of vectors is given,
+the values of the columns are concatenated with the column name. E.g. list(doc_id = 1, sentence = 1) will be [doc_id = 1, sentence = 2].
+This only works if the tagged tokens are used in the html browser created with the \code{\link{create_browser}} function (as it relies on javascript).}
 
 \item{...}{named arguments are used as attributes in the span tag for each token, with the name being the name
 of the attribute (e.g., class, . Each argument must be a vector of the same length as the number of tokens.
@@ -41,7 +54,9 @@ tag_tokens(tokens = c('token_1','token_2', 'token_3'),
            style = attr_style(color = highlight_col(c(TRUE,TRUE,FALSE))))
 
 ## span_adjacent can be used to put tokens with identical tags within one tag
+## but then a doc_id has to be given as well
 tag_tokens(tokens = c('token_1','token_2', 'token_3'),
            class = c(1,1,NA),
-           span_adjacent=TRUE)
+           span_adjacent=TRUE,
+           doc_id = c(1,1,1))
 }
